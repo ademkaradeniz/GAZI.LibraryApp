@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewBag.Title = "Kullanıcı Rolleri";
+    Layout = "~/Views/Shared/_MenagerLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tüm Kullanıcı Rolleri Listesi </font></font></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li style="float:right;">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div id="datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-xs-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn-sm btn-success" id="btnsifirla" data-toggle="modal" data-target=".bs-example-modal-sm" style="width:175px; margin-bottom:10px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kullanıcı Rol Ekle</font></font></button>
+                                </div>
+                            </div>
+                            <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ID</font></font>
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rol Adı</font></font>
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">İşlem Tarihi</font></font>
+                                        </th>
+                                        <th class="sorting col-md-2" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">İşlemler</font></font>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        foreach (var item in ViewBag.Roles)
+                                        {
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.ID</font></font></td>
+                                                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Name</font></font></td>
+                                                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.CreateOrModifyDate.ToString("dd.MM.yyyy")</font></font></td>
+                                                <td style="padding-left:2.5%;">
+                                                    <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg-delete" data-id="@item.ID" class="btn-xs btn-danger frm-delete-role col-md-5 col-xs-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sil</font></font></button>
+                                                    <button type="button" data-toggle="modal" data-target=".bs-example-modal-sm" data-id="@item.ID" data-name="@item.Name" class="btn-xs btn-info frm-update-role col-md-5 col-xs-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Güncelle</font></font></button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 17px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">x</font></font></span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kullanıcı Rol Kayıt Formu</font></font></h4>
+            </div>
+            <div class="modal-body">
+                <form data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rol Adı</font></font>
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <select id="role_name" tabindex="3" class="form-control">
+                                    <option value="">Rol Seçiniz</option>
+                                    <option value="Kullanıcı">Kullanıcı</option>
+                                    <option value="Yönetici">Yönetici</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kayıt Tarihi </font></font>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" placeholder="Kayıt Tarihi" disabled required="required" class="form-control" value="@DateTime.Now.ToString("dd.MM.yyyy")">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-2 col-xs-0">
+
+                        <div class="form-group row">
+                            <br />
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="profile_img">
+                                    <div id="crop-avatar">
+                                        <!-- Current avatar -->
+                                        <img class="img-responsive avatar-view" src="~/Content/Gentelella/production/images/user.png" alt="Avatar" title="">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-sm btn-danger" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kapat</font></font></button>
+                <button type="button" class="btn-sm btn-success" id="btn-add-role"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kullanıcı Rol Kaydet</font></font></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg-delete in" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 17px;">
+    <div class="modal-dialog modal-lg modal-danger">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">x</font></font></span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kullanıcı Rol Silme Formu</font></font></h4>
+            </div>
+            <div class="modal-body">
+                <h4>Kullanıcı Rolünü gerçekten silmek istiyor musunuz?</h4>
+                <p>Kullanıcı Rolünü sildiğiniz taktirde kullanıcı rolüne bağlı olan tüm kullanıcılar kitap almadıysa silinecektir!</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-sm btn-info" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kapat</font></font></button>
+                <button type="button" class="btn-sm btn-danger" id="btn-delete-role"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kullanıcı Rol Sil</font></font></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/PageScripts/AddRole.js"></script>
+<script type="text/javascript">
+    var submitUrl = "@Url.Action("CreateOrUpdateRole", "Menager")";
+    var deleteUrl = "@Url.Action("DeleteRole", "Menager")";
+</script>
+
+

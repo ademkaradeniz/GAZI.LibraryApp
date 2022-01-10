@@ -1,0 +1,256 @@
+﻿
+@{
+    ViewBag.Title = "Kitap Ödünç Verme Ekranı";
+    Layout = "~/Views/Shared/_MenagerLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kütüphanede Olan Kitap Listesi </font></font></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li style="float:right;">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div id="datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-xs-12">
+                            @*<div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn-sm btn-success" id="btnsifirla" data-toggle="modal" data-target=".bs-example-modal-lg" style="width:175px; margin-bottom:10px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kitap Ekle</font></font></button>
+                                    </div>
+                                </div>*@
+                            <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Barkod No</font></font>
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kitap Adı</font></font>
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Yazar</font></font>
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Yayınevi</font></font>
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tür</font></font>
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sayfa</font></font>
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Basım Tarihi</font></font>
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">İşlemler</font></font>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        foreach (var item in ViewBag.LibraryBooks)
+                                        {
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.ID</font></font></td>
+                                                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Name</font></font></td>
+                                                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.AuthorName</font></font></td>
+                                                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.PublisherName</font></font></td>
+                                                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.TypeName</font></font></td>
+                                                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.NumberOfPage</font></font></td>
+                                                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.YearOfPublic</font></font></td>
+                                                <td>
+                                                    <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg" data-id="@item.ID" data-bookname="@item.Name" data-authorname="@item.AuthorName" data-publishername="@item.PublisherName" data-typename="@item.TypeName" data-numberofpage="@item.NumberOfPage" data-yearofpublic="@item.YearOfPublic" class="btn-xs btn-success frm-lend-book col-md-12 col-xs-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kitabı Ver</font></font></button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade bs-example-modal-lg in" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 17px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">x</font></font></span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Emanet Kitap Kayıt Formu</font></font></h4>
+            </div>
+            <div class="modal-body">
+                <form data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kitap Adı</font></font>
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" tabindex="1" disabled id="book_name" placeholder="Kitap Adı" required="required" class="form-control" value="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kitap Yayınevi</font></font>
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" tabindex="1" disabled id="publisher_name" placeholder="Kitap Yazarı" required="required" class="form-control" value="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kitap Sayfası</font></font>
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" tabindex="5" disabled id="number_of_page" placeholder="Kitap Sayfası" required="required" class="form-control" value="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Yazar</font></font>
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" tabindex="1" disabled id="author_name" placeholder="Kitap Yazarı" required="required" class="form-control" value="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kitap Türü</font></font>
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" tabindex="1" disabled id="type_name" placeholder="Kitap Türü" required="required" class="form-control" value="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Basım Yılı</font></font>
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" maxlength="4" disabled tabindex="6" id="year_of_public" placeholder="Basım Yılı" required="required" class="form-control" value="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-2 col-xs-0">
+
+                        <div class="form-group row">
+                            <br />
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="profile_img">
+                                    <div id="crop-avatar">
+                                        <!-- Current avatar -->
+                                        <img class="img-responsive avatar-view" src="~/Content/Gentelella/production/images/user.png" alt="Avatar" title="">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kullanıcı </font></font>
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <select id="select_user" tabindex="3" class="form-control">
+                                    <option value="">Kullanıcı Seçiniz</option>
+                                    @{
+                                        foreach (var item in ViewBag.Users)
+                                        {
+                                            <option value="@item.ID">@item.Name @item.SurName</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">E-Mail </font></font>
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" disabled tabindex="6" id="e_mail" placeholder="E-Mail" required="required" class="form-control" value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kullanıcı ID</font></font>
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" disabled tabindex="6" id="user_id" placeholder="Kullanıcı Kimlik Bilgisi" required="required" class="form-control" value="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Telefon </font></font>
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" disabled tabindex="6" id="telephone" placeholder="Telefon" required="required" class="form-control" value="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kitap Alış Tarih</font></font>
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="date"  tabindex="6" id="alis_tarih" placeholder="Kitap Alış Tarihi" required="required" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12 col-sm-12 col-xs-12 label-align" for="first-name">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kitap Geri Verilecek Tarih</font></font>
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="date" tabindex="6" id="verilecek_tarih" placeholder="Kitap Geri Verilecek Tarih" required="required" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-sm btn-danger" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kapat</font></font></button>
+                <button type="button" class="btn-sm btn-success" id="btn-add-borrowbook"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kitap'ı Emanet Olarak Ver</font></font></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/PageScripts/LendBook.js"></script>
+<script type="text/javascript">
+    var selectUrl = "@Url.Action("GetUser", "Menager")";
+    var submitUrl = "@Url.Action("CreateOrUpdateBorrowBook", "Menager")";
+</script>
+

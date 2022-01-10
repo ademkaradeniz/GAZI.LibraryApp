@@ -1,0 +1,213 @@
+﻿@model GAZI.LibraryApp.UI.Models.LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Kullanıcı Girişi - Gazi KYS </title>
+
+    <link rel="stylesheet" href="~/Content/Gentelella/vendors/iCheck/skins/square/blue.css" />
+    <script type="text/javascript" src="~/Content/Gentelella/vendors/iCheck/icheck.js"></script>
+
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/vendors/bootstrap/dist/css/bootstrap.min.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/plugins/bootstrapvalidator/css/bootstrapValidator.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/vendors/font-awesome/css/font-awesome.min.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/vendors/nprogress/nprogress.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/build/css/custom.min.css' />
+
+    <!-- Animate.css -->
+    <link href="~/Content/Gentelella/vendors/animate.css/animate.min.css" rel="stylesheet">
+
+    <!--Cssler-->
+    @Styles.Render("~/Content/Gentelella")
+    @Styles.Render("~/Content/GentelellaDatatables")
+
+
+    <link rel='stylesheet' type='text/css' href='~/Content/themes/base/jquery.ui.core.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/themes/base/jquery.ui.resizable.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/themes/base/jquery.ui.selectable.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/themes/base/jquery.ui.accordion.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/themes/base/jquery.ui.autocomplete.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/themes/base/jquery.ui.button.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/themes/base/jquery.ui.dialog.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/themes/base/jquery.ui.slider.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/themes/base/jquery.ui.tabs.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/themes/base/jquery.ui.datepicker.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/themes/base/jquery.ui.progressbar.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/themes/base/jquery.ui.theme.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/dropzone.css' />
+
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/vendors/bootstrap/dist/css/bootstrap.min.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/plugins/bootstrapvalidator/css/bootstrapValidator.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/vendors/font-awesome/css/font-awesome.min.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/vendors/nprogress/nprogress.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/build/css/custom.min.css' />
+
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/vendors/iCheck/skins/flat/green.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css' />
+    <link rel='stylesheet' type='text/css' href='~/Content/Gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css' />
+    <link rel="shortcut icon" href="~/Content/gazi.png" type="image/x-icon">
+
+    <script src="~/Scripts/jquery.min.js"></script>
+
+
+</head>
+
+<body class="login">
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+
+                    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                    {
+
+                        <h1>GAZİ KYS</h1>
+
+                        @Html.ValidationSummary(true)
+                        <fieldset>
+                            <div>
+                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "Kullanıcı Adı", type = "text", autofocus = "true" })
+                                @Html.ValidationMessageFor(x => x.UserName)
+                            </div>
+                            <div>
+                                @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Şifre", type = "password" })
+                                @Html.ValidationMessageFor(x => x.Password)
+                            </div>
+                            <div>
+                                <button class="btn btn-default submit" type="submit" style="width: 100%; border-radius: 16px; border-color: green; border-width: initial; ">Giriş</button>
+                                <button class="btn btn-default submit" type="button" data-toggle="modal" data-target=".bs-example-modal-sm" style="width: 100%; border-radius: 16px; border-color: red; border-style: groove; border-width: initial; ">Şifremi Unuttum</button>
+                            </div>
+                        </fieldset>
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            <p class="change_link">
+                                <a href="#signup" style="margin:0px;" class="to_register">Kullanıcı Kayıt Paneli </a>
+                            </p>
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h2>GAZİ KÜTÜPHANE YÖNETİM SİSTEMİ</h2>
+                            </div>
+                        </div>
+
+                    }
+
+                </section>
+            </div>
+
+            <div id="register" class="animate form registration_form" style="margin-top:-18px;">
+                <section class="login_content" style="padding:0px;">
+                    <form style="margin:0px;">
+                        <h1 style="margin-bottom:26px;">Kullanıcı Kayıt</h1>
+                        <div>
+                            <input type="text" maxlength="11" id="username" class="form-control" placeholder="Kullanıcı Adı" required="" />
+                        </div>
+                        <div>
+                            <input type="text" id="name" class="form-control" placeholder="Ad" required="" />
+                        </div>
+                        <div>
+                            <input type="text" id="surname" class="form-control" placeholder="Soyad" required="" />
+                        </div>
+                        <div>
+                            <input type="email" id="email" class="form-control" placeholder="Email" required="" />
+                        </div>
+                        <div style="margin-bottom:12px">
+                            <input type="text" maxlength="11" id="telephone" class="form-control" placeholder="Telefon" required="" />
+                        </div>
+                        <div>
+                            <input type="password" id="password" class="form-control" placeholder="Şifre" required="" />
+                        </div>
+                        <div>
+                            <input type="password" id="password_2" class="form-control" placeholder="Şifre Onay" required="" />
+                        </div>
+                        <div>
+                            <a class="btn btn-default submit" href="\Login\Index" style="margin: 0px 0px 8px; width: 49%; border-radius: 16px; border-color: red; border-style: groove; border-width: initial;">Geri Dön</a>
+                            <a class="btn btn-default submit" id="btn-add-user" style="margin: 0px 0px 8px; width: 49%; border-radius: 16px; border-color: green; border-width: initial;">Kayıt Ol</a>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+
+                            <div class="clearfix"></div>
+
+                            <div>
+                                <h2>GAZİ KURS YÖNETİM SİSTEMİ</h2>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+
+        <div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 17px;">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="border-radius:16px">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">x</font></font></span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Şifremi Unuttum</font></font></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row" style="margin-top:5px;margin-bottom:5px;">
+                            <label class="col-form-label col-md-12 col-sm-12 label-align" for="first-name">
+                                    <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sisteme Kayıtlı E-Mail </font></font>
+                                </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="email" id="emailsender" style="border-radius:8px" required="required" placeholder="E-Mail" class="form-control" value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="padding:8px;">
+                        <button id="frmmailsender" class="btn btn-info submit" type="button" style="border-radius:16px;">Şifremi Gönder</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @Scripts.Render("~/Content/GentelellaJs")
+
+
+    @Scripts.Render("~/Content/GentelellaDatatablesJs")
+
+</body>
+</html>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+</script>
+
+<script src="~/Content/PageScripts/Login/AddUser.js"></script>
+<script src="~/Content/PageScripts/Login/mailSender.js"></script>
+
+<script type="text/javascript">
+    var submitUrl = "@Url.Action("CreateUser", "Login")";
+    var mailSenderUrl="@Url.Action("MailSender", "Login")";
+</script>
