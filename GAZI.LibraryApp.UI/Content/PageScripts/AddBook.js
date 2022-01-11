@@ -119,7 +119,6 @@ $(document).ready(function () {
         $('#author_id').val($(this).data("authorid"));
         $('#type_id').val($(this).data("typeid"));
         $('#year_of_public').val($(this).data("yearofpublic"));
-        alert($(this).data("image"));
         $('#bookimage').attr('src', $(this).data("image"));
         bookid = $(this).data("id");
     });

@@ -3712,7 +3712,7 @@
     <Content Include="Content\Gentelella\vendors\validator\validator.js" />
     <Content Include="Content\jquery.min.js" />
     <Content Include="Content\PageScripts\AddAuthor.js" />
-    <Content Include="Content\PageScripts\addBooks.js" />
+    <Content Include="Content\PageScripts\AddBook.js" />
     <Content Include="Content\PageScripts\AddPublisher.js" />
     <Content Include="Content\PageScripts\AddRole.js" />
     <Content Include="Content\PageScripts\AddType.js" />
