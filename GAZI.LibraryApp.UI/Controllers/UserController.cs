@@ -4,6 +4,7 @@ using GAZI.LibraryApp.Business.MailAppService;
 using GAZI.LibraryApp.Business.UsersAppService;
 using GAZI.LibraryApp.Data.Entities;
 using GAZI.LibraryApp.UI.Auth;
+using GAZI.LibraryApp.UI.Models;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -138,6 +139,15 @@ namespace GAZI.LibraryApp.UI.Controllers
             }
             else
             {
+                //Ön yüz bilgilerini getirir.
+                MenagerIndexModel model = new MenagerIndexModel();
+                model.TotalUsers = usersApp.GetAllUsers().Count;
+                model.UserRoles = usersApp.GetAllRoles().Count;
+                model.TotalBooks = booksApp.GetAllBooks().Count;
+                model.LibraryBooks = booksApp.GetAllLibraryBooks().Count;
+                model.BorrowBooks = booksApp.GetAllNotLibraryBooks().Count;
+
+                ViewBag.Information = model;
                 return View();
             }
         }

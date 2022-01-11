@@ -8,6 +8,7 @@ $(document).ready(function () {
         $('#author_name').val($(this).data("authorname"));
         $('#type_name').val($(this).data("typename"));
         $('#year_of_public').val($(this).data("yearofpublic"));
+        $('#bookimage').val($(this).data("image"));
 
     });
 

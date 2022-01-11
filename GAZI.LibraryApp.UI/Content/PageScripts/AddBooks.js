@@ -17,6 +17,7 @@ $(document).ready(function () {
         $('#author_id').val("");
         $('#type_id').val("");
         $('#year_of_public').val("");
+        $('#bookimage').attr('src', '/Content/Gentelella/production/images/book.png');
         bookid = "";
         silinecekbookid = "";
 
@@ -119,8 +120,15 @@ $(document).ready(function () {
         $('#author_id').val($(this).data("authorid"));
         $('#type_id').val($(this).data("typeid"));
         $('#year_of_public').val($(this).data("yearofpublic"));
-        $('#bookimage').attr('src', $(this).data("image"));
         bookid = $(this).data("id");
+        if ($(this).data("image") == null || $(this).data("image") == "") {
+            $('#bookimage').attr('src', '/Content/Gentelella/production/images/book.png');
+        }
+        else {
+            $('#bookimage').attr('src', $(this).data("image"));
+        }
+        
+        
     });
 
 
