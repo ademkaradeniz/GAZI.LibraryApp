@@ -1,10 +1,10 @@
 ﻿
 //Basım Yılı Sadece Sayı Girişi Yapablimesini Sağlar
-    function isNumberKey(evt) {
-        var charCode = (evt.which) ? evt.which : evt.keyCode
-        if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-        return true;
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
 }
 
 $(document).ready(function () {
@@ -119,6 +119,8 @@ $(document).ready(function () {
         $('#author_id').val($(this).data("authorid"));
         $('#type_id').val($(this).data("typeid"));
         $('#year_of_public').val($(this).data("yearofpublic"));
+        alert($(this).data("image"));
+        $('#bookimage').attr('src', $(this).data("image"));
         bookid = $(this).data("id");
     });
 

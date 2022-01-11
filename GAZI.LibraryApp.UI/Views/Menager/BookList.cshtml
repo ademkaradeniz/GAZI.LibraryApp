@@ -68,7 +68,7 @@
                                                 <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.YearOfPublic</font></font></td>
                                                 <td style="padding-left:2.5%;">
                                                     <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg-delete" data-id="@item.ID" class="btn-xs btn-danger frm-delete-book col-md-5 col-xs-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sil</font></font></button>
-                                                    <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg" data-id="@item.ID" data-name="@item.Name" data-authorid="@item.AuthorID" data-publisherid="@item.PublisherID" data-typeid="@item.TypeID" data-numberofpage="@item.NumberOfPage" data-yearofpublic="@item.YearOfPublic" class="btn-xs btn-info frm-update-book col-md-5 col-xs-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Güncelle</font></font></button>
+                                                    <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg" data-id="@item.ID" data-name="@item.Name" data-authorid="@item.AuthorID" data-publisherid="@item.PublisherID" data-typeid="@item.TypeID" data-numberofpage="@item.NumberOfPage" data-yearofpublic="@item.YearOfPublic" data-image="@item.Image" class="btn-xs btn-info frm-update-book col-md-5 col-xs-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Güncelle</font></font></button>
                                                 </td>
                                             </tr>
                                         }
@@ -131,6 +131,7 @@
                                 <input type="number" tabindex="5" id="number_of_page" placeholder="Kitap Sayfası" required="required" class="form-control" value="">
                             </div>
                         </div>
+
                     </div>
 
                     <div class="col-md-5 col-sm-5 col-xs-12">
@@ -177,6 +178,9 @@
                                 <input type="text" maxlength="4" onkeypress="return isNumberKey(event)" tabindex="6" id="year_of_public" placeholder="Basım Yılı" required="required" class="form-control" value="">
                             </div>
                         </div>
+
+
+
                     </div>
 
                     <div class="col-md-2 col-sm-2 col-xs-0">
@@ -187,13 +191,34 @@
                                 <div class="profile_img">
                                     <div id="crop-avatar">
                                         <!-- Current avatar -->
-                                        <img class="img-responsive avatar-view" src="~/Content/Gentelella/production/images/user.png" alt="Avatar" title="">
+                                        <img class="img-responsive avatar-view" id="bookimage" src="~/Content/Gentelella/production/images/book.png" alt="Avatar" title="">
                                     </div>
                                 </div>
                             </div>
 
                         </div>
 
+                    </div>
+
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-12 col-sm-12 col-xs-12" for="first-name" style="text-align:left;margin-bottom:5px;">
+                                Kitap Resmi
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <img id="yukluresim" class="" style="display:none; width:100%; height:200px;" src="" />
+                                <div id="mydropzone" style="min-height: 200px; max-height: 200px;min-width: 100%;margin-left:-4px; border-radius:10px;">
+                                    <div class="dz-message" data-dz-message>
+                                        <img class="mrexelicon" style="width:60px; height:40px;" src="~/Content/Gentelella/Upload.png" />
+                                        <h2 class="mrdropexelh1">Kitap Resim Yükleme Alanı</h2>
+                                        <span>Yüklemek için tıklayınız..</span>
+                                    </div>
+
+                                </div>
+                                <input type="text" style="display:none;" id="image" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-5 col-sm-5 col-xs-12">
@@ -238,9 +263,60 @@
     </div>
 </div>
 
-<script src="~/Content/PageScripts/AddBook.js"></script>
+<script src="~/Content/PageScripts/addBooks.js"></script>
 <script type="text/javascript">
     var submitUrl = "@Url.Action("CreateOrUpdateBook", "Menager")";
     var deleteUrl = "@Url.Action("DeleteBook", "Menager")";
 </script>
 
+<script src="~/Content/dropzone.js"></script>
+
+<script>
+    $("#mydropzone").dropzone({
+        url: "/Menager/Upload",
+        addRemoveLinks: true,
+        maxFiles: 1,
+        acceptedFiles: ".jpg,.png",
+
+        dictDefaultMessage:
+            'Resim Yükleme Hatası',
+        dictResponseError: 'Error uploading file!',
+        init: function () {
+            this.on("maxfilesexceeded",
+                function (file) {
+                    this.removeFile(file);
+                });
+            $("#mydropzone").addClass("dropzone");
+        },
+        success: function (file, response) {
+            if (response == "Error") {
+                $.alert("Resim Jpg veya Png formatında yüklenmeli!", {
+                    title: 'Resim Yükleme İşlemi',
+                    closeTime: 3000,
+                    autoClose: true,
+                    withTime: false,
+                    type: "danger",
+                    isOnly: true,
+                    onClose: function () {
+
+                    }
+                });
+                this.removeFile(file);
+
+            }
+            else {
+                $("#image").val(response);
+                $('#bookimage').attr('src', response);
+
+            }
+
+        },
+        removedfile: function (file) {
+            $('#bookimage').attr('src', "/Content/Gentelella/production/images/book.png");
+            var _ref;
+            return (_ref = file.previewElement) != null
+                ? _ref.parentNode.removeChild(file.previewElement)
+                : void 0;
+        }
+    });
+</script>

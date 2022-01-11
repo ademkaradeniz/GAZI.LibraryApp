@@ -193,6 +193,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\MenagerIndexModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -256,9 +257,13 @@
     <Content Include="Content\Gentelella\production\glyphicons.html" />
     <Content Include="Content\Gentelella\production\icons.html" />
     <Content Include="Content\Gentelella\production\images\american-express.png" />
+    <Content Include="Content\Gentelella\production\images\author.png" />
+    <Content Include="Content\Gentelella\production\images\book.png" />
     <Content Include="Content\Gentelella\production\images\cropper.jpg" />
+    <Content Include="Content\Gentelella\production\images\e-mail.png" />
     <Content Include="Content\Gentelella\production\images\img.jpg" />
     <Content Include="Content\Gentelella\production\images\inbox.png" />
+    <Content Include="Content\Gentelella\production\images\lend-return-book.png" />
     <Content Include="Content\Gentelella\production\images\mastercard.png" />
     <Content Include="Content\Gentelella\production\images\media.jpg" />
     <Content Include="Content\Gentelella\production\images\paypal.png" />
@@ -268,6 +273,8 @@
     <Content Include="Content\Gentelella\production\images\prod-3.jpg" />
     <Content Include="Content\Gentelella\production\images\prod-4.jpg" />
     <Content Include="Content\Gentelella\production\images\prod-5.jpg" />
+    <Content Include="Content\Gentelella\production\images\publisher.png" />
+    <Content Include="Content\Gentelella\production\images\type.png" />
     <Content Include="Content\Gentelella\production\images\user.png" />
     <Content Include="Content\Gentelella\production\images\visa.png" />
     <Content Include="Content\Gentelella\production\inbox.html" />
@@ -3705,7 +3712,7 @@
     <Content Include="Content\Gentelella\vendors\validator\validator.js" />
     <Content Include="Content\jquery.min.js" />
     <Content Include="Content\PageScripts\AddAuthor.js" />
-    <Content Include="Content\PageScripts\AddBook.js" />
+    <Content Include="Content\PageScripts\addBooks.js" />
     <Content Include="Content\PageScripts\AddPublisher.js" />
     <Content Include="Content\PageScripts\AddRole.js" />
     <Content Include="Content\PageScripts\AddType.js" />
@@ -4742,6 +4749,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\Books\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -77,7 +77,7 @@ namespace GAZI.LibraryApp.Data.Repositories.BooksRepositories
              */
             List<ViewBooks> books = new List<ViewBooks>();
             _command.Connection = _connection;
-            _command.CommandText = $"SELECT vb.* FROM ViewBooks vb WHERE NOT EXISTS(SELECT bb.BookID, bb.Status FROM BorrowBooks bb WHERE vb.ID=bb.BookID AND Status=1)";
+            _command.CommandText = $"SELECT vb.* FROM ViewBooks vb WHERE NOT EXISTS(SELECT bb.BookID, bb.Status FROM BorrowBooks bb WHERE vb.ID=bb.BookID AND Status=1) AND Status=1";
             OracleDataReader rdr = _command.ExecuteReader();
             while (rdr.Read())
             {
@@ -112,7 +112,7 @@ namespace GAZI.LibraryApp.Data.Repositories.BooksRepositories
              */
             List<ViewBooks> books = new List<ViewBooks>();
             _command.Connection = _connection;
-            _command.CommandText = $"SELECT b.* FROM Books b WHERE EXISTS(SELECT bb.BookID, bb.Status FROM BorrowBooks bb WHERE b.ID=bb.BookID AND Status=1);";
+            _command.CommandText = $"SELECT b.* FROM ViewBooks b WHERE EXISTS(SELECT bb.BookID, bb.Status FROM BorrowBooks bb WHERE b.ID=bb.BookID AND Status=1) AND Status=1";
             OracleDataReader rdr = _command.ExecuteReader();
             while (rdr.Read())
             {

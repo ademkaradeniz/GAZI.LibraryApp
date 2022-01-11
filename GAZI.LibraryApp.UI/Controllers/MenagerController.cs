@@ -5,11 +5,14 @@ using GAZI.LibraryApp.Business.UsersAppService;
 using GAZI.LibraryApp.Data.Entities;
 using GAZI.LibraryApp.Data.Repositories.BooksRepositories;
 using GAZI.LibraryApp.UI.Auth;
+using GAZI.LibraryApp.UI.Models;
 using Ninject;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace GAZI.LibraryApp.UI.Controllers
@@ -53,6 +56,15 @@ namespace GAZI.LibraryApp.UI.Controllers
             }
             else
             {
+                //Ön yüz bilgilerini getirir.
+                MenagerIndexModel model = new MenagerIndexModel();
+                model.TotalUsers = usersApp.GetAllUsers().Count;
+                model.UserRoles = usersApp.GetAllRoles().Count;
+                model.TotalBooks = booksApp.GetAllBooks().Count;
+                model.LibraryBooks = booksApp.GetAllLibraryBooks().Count;
+                model.BorrowBooks = booksApp.GetAllNotLibraryBooks().Count;
+
+                ViewBag.Information = model;
                 return View();
             }
         }
@@ -694,5 +706,53 @@ namespace GAZI.LibraryApp.UI.Controllers
         }
 
         #endregion
+
+        [HttpPost]
+        public JsonResult Upload()
+        {
+            string path, fName = "BookImage_" + DateTime.Now.ToString("ddMMyyyyHHmmss");
+
+            foreach (string fileName in Request.Files)
+            {
+                HttpPostedFileBase file = Request.Files[fileName];
+                //Save file content goes here
+                if (file != null && file.ContentLength > 0)
+                {
+
+                    var originalDirectory = new DirectoryInfo(string.Format("{0}Content\\Images\\Books", Server.MapPath(@"\")));
+
+                    string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "");
+
+                    var fileName1 = Path.GetFileName(fName);
+
+                    bool isExists = System.IO.Directory.Exists(pathString);
+
+                    if (!isExists)
+                        System.IO.Directory.CreateDirectory(pathString);
+
+                    path = string.Format("{0}\\{1}", pathString, fName);
+                    try
+                    {
+                        WebImage img = new WebImage(file.InputStream);
+                        if (img.Width != 0 || img.Height != 0)
+                        {
+                            img.Save(path);
+                            return Json("/Content/Images/Books/" + fName + "." + img.ImageFormat, JsonRequestBehavior.AllowGet);
+                        }
+                        else
+                        {
+                            return Json("Error", JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        return Json("Error", JsonRequestBehavior.AllowGet);
+                    }
+
+                }
+
+            }
+            return Json("Error", JsonRequestBehavior.AllowGet);
+        }
     }
 }
