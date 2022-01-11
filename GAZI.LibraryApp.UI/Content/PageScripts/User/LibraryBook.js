@@ -8,7 +8,13 @@ $(document).ready(function () {
         $('#author_name').val($(this).data("authorname"));
         $('#type_name').val($(this).data("typename"));
         $('#year_of_public').val($(this).data("yearofpublic"));
-        $('#bookimage').val($(this).data("image"));
+
+        if ($(this).data("image") == null || $(this).data("image") == "") {
+            $('#bookimage').attr('src', '/Content/Gentelella/production/images/book.png');
+        }
+        else {
+            $('#bookimage').attr('src', $(this).data("image"));
+        }
 
     });
 

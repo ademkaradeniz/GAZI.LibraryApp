@@ -37,7 +37,7 @@ namespace GAZI.LibraryApp.Data.Repositories.BooksRepositories
         public void Update(Books book)
         {
             _repository.Add($"UPDATE Books SET Name = '{book.Name}', AuthorID={book.AuthorID}, PublisherID={book.PublisherID}," +
-                $" TypeID={book.PublisherID}, YearOfPublic='{book.YearOfPublic}', NumberOfPage = {book.NumberOfPage}, Status = {book.Status}" +
+                $" TypeID={book.TypeID}, YearOfPublic='{book.YearOfPublic}', NumberOfPage = {book.NumberOfPage}, Status = {book.Status}" +
                             $", Image = '{book.Image}', CreateOrModifyDate = '{DateTime.Now.ToString("dd.MM.yyyy")}' WHERE ID = {book.ID}");
         }
 

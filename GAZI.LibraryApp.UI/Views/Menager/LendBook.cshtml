@@ -67,7 +67,7 @@
                                                 <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.NumberOfPage</font></font></td>
                                                 <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.YearOfPublic</font></font></td>
                                                 <td>
-                                                    <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg" data-id="@item.ID" data-bookname="@item.Name" data-authorname="@item.AuthorName" data-publishername="@item.PublisherName" data-typename="@item.TypeName" data-numberofpage="@item.NumberOfPage" data-yearofpublic="@item.YearOfPublic" class="btn-xs btn-success frm-lend-book col-md-12 col-xs-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kitabı Ver</font></font></button>
+                                                    <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg" data-id="@item.ID" data-bookname="@item.Name" data-authorname="@item.AuthorName" data-publishername="@item.PublisherName" data-typename="@item.TypeName" data-numberofpage="@item.NumberOfPage" data-yearofpublic="@item.YearOfPublic" data-image="@item.Image" class="btn-xs btn-success frm-lend-book col-md-12 col-xs-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kitabı Ver</font></font></button>
                                                 </td>
                                             </tr>
                                         }
@@ -162,7 +162,7 @@
                                 <div class="profile_img">
                                     <div id="crop-avatar">
                                         <!-- Current avatar -->
-                                        <img class="img-responsive avatar-view" src="~/Content/Gentelella/production/images/lend-return-book.png" alt="Avatar" title="">
+                                        <img class="img-responsive avatar-view" id="bookimage" src="~/Content/Gentelella/production/images/lend-return-book.png" alt="Avatar" title="">
                                     </div>
                                 </div>
                             </div>

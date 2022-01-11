@@ -46,6 +46,13 @@ $(document).ready(function () {
         $('#verilecek_tarih').val($(this).data("issuedate"));
         borrowBookID = $(this).data("id");
 
+        if ($(this).data("image") == null || $(this).data("image") == "") {
+            $('#bookimage').attr('src', '/Content/Gentelella/production/images/lend-return-book.png');
+        }
+        else {
+            $('#bookimage').attr('src', $(this).data("image"));
+        }
+
 
     });
 

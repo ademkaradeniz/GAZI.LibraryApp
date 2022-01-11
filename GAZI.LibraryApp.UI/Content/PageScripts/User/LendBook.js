@@ -60,6 +60,12 @@ $(document).ready(function () {
         $('#year_of_public').val($(this).data("yearofpublic"));
         kitapID = $(this).data("id");
 
+        if ($(this).data("image") == null || $(this).data("image") == "") {
+            $('#bookimage').attr('src', '/Content/Gentelella/production/images/lend-return-book.png');
+        }
+        else {
+            $('#bookimage').attr('src', $(this).data("image"));
+        }
 
     });
 
